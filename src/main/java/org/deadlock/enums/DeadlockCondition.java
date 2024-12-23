@@ -1,4 +1,4 @@
-package org.deadlock.deadlockenum;
+package org.deadlock.enums;
 
 public enum DeadlockCondition {
     MUTUAL_EXCLUSION,   // 상호 배제 조건

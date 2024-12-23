@@ -1,14 +1,10 @@
 package org.deadlock;
 
-import org.deadlock.deadlockenum.DeadlockCondition;
-import org.deadlock.deadlockenum.DeadlockType;
+import org.deadlock.enums.DeadlockCondition;
+import org.deadlock.enums.ExecuteType;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
@@ -20,11 +16,14 @@ public class Main implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // 데드락 시뮬레이터 실행
-        StrategyContext simulatorContext = new StrategyContext(DeadlockCondition.HOLD_AND_WAIT, DeadlockType.SIMULATOR);
-        simulatorContext.executeStrategy();
+//        StrategyContext simulatorContext = new StrategyContext(DeadlockCondition.HOLD_AND_WAIT, ExecuteType.SIMULATOR);
+//        simulatorContext.executeStrategy();
+
+        StrategyContext simulatorContext2 = new StrategyContext(DeadlockCondition.MUTUAL_EXCLUSION, ExecuteType.SIMULATOR);
+        simulatorContext2.executeStrategy();
 
         // 솔루션 실행
-        StrategyContext solutionContext = new StrategyContext(DeadlockCondition.CIRCULAR_WAIT, DeadlockType.SOLUTION);
+        StrategyContext solutionContext = new StrategyContext(DeadlockCondition.CIRCULAR_WAIT, ExecuteType.SOLUTION);
         solutionContext.executeStrategy();
 
 

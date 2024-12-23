@@ -1,8 +1,8 @@
 package org.deadlock.solution;
 
-import org.deadlock.deadlockInterface.Deadlock;
+import org.deadlock.interfaces.StrategyExecutor;
 
-public class DeadlockCircularWaitSolution implements Deadlock {
+public class DeadlockCircularWaitSolution implements StrategyExecutor {
     @Override
     public void executeStrategy() {
 

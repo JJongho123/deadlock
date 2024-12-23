@@ -1,16 +1,16 @@
 package org.deadlock;
 
-import org.deadlock.deadlockInterface.Deadlock;
-import org.deadlock.deadlockenum.DeadlockCondition;
-import org.deadlock.deadlockenum.DeadlockType;
+import org.deadlock.interfaces.StrategyExecutor;
+import org.deadlock.enums.DeadlockCondition;
+import org.deadlock.enums.ExecuteType;
 import org.deadlock.factory.DeadlockFactory;
 
 
 public class StrategyContext {
 
-    private final Deadlock strategy;
+    private final StrategyExecutor strategy;
 
-    public StrategyContext(DeadlockCondition condition, DeadlockType type) {
+    public StrategyContext(DeadlockCondition condition, ExecuteType type) {
         this.strategy = DeadlockFactory.getStrategy(condition, type);
     }
 

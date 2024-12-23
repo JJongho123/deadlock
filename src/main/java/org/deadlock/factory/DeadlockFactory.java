@@ -1,8 +1,8 @@
 package org.deadlock.factory;
 
-import org.deadlock.deadlockInterface.Deadlock;
-import org.deadlock.deadlockenum.DeadlockCondition;
-import org.deadlock.deadlockenum.DeadlockType;
+import org.deadlock.interfaces.StrategyExecutor;
+import org.deadlock.enums.DeadlockCondition;
+import org.deadlock.enums.ExecuteType;
 import org.deadlock.simulator.DeadlockCircularWaitSimulator;
 import org.deadlock.simulator.DeadlockHoldAndWaitSimulator;
 import org.deadlock.simulator.DeadlockMutualExclusionSimulator;
@@ -14,8 +14,8 @@ import org.deadlock.solution.DeadlockNoPreemptionSolution;
 
 public class DeadlockFactory {
 
-    public static Deadlock getStrategy(DeadlockCondition condition, DeadlockType type) {
-        if (type == DeadlockType.SIMULATOR) {
+    public static StrategyExecutor getStrategy(DeadlockCondition condition, ExecuteType type) {
+        if (type == ExecuteType.SIMULATOR) {
             return switch (condition) {
 
                 case CIRCULAR_WAIT -> new DeadlockCircularWaitSimulator();
@@ -25,7 +25,7 @@ public class DeadlockFactory {
                 default -> throw new IllegalArgumentException("Unknown DeadlockCondition: " + condition);
 
             };
-        } else if (type == DeadlockType.SOLUTION) {
+        } else if (type == ExecuteType.SOLUTION) {
             return switch (condition) {
 
                 case CIRCULAR_WAIT -> new DeadlockCircularWaitSolution();

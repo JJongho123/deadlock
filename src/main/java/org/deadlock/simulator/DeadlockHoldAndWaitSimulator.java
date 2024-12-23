@@ -1,27 +1,16 @@
-package org.lock;
+package org.deadlock.simulator;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.deadlock.database.DBConnectionManager;
+import org.deadlock.deadlockInterface.Deadlock;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.Statement;
 
-@SpringBootApplication
-public class Main implements CommandLineRunner {
-    public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
-    }
-
+public class DeadlockHoldAndWaitSimulator implements Deadlock {
     @Override
-    public void run(String... args) throws Exception {
-        String url = "jdbc:mysql://localhost:3306/test2";
-        String user = "root";
-        String password = "";
-
-        try (Connection conn1 = DriverManager.getConnection(url, user, password);
-             Connection conn2 = DriverManager.getConnection(url, user, password)) {
+    public void executeStrategy() {
+        try (Connection conn1 = DBConnectionManager.getConnection();
+             Connection conn2 = DBConnectionManager.getConnection()) {
 
             conn1.setAutoCommit(false);
             conn2.setAutoCommit(false);
@@ -48,15 +37,14 @@ public class Main implements CommandLineRunner {
                 }
             });
 
-//            t1.start();
+            t1.start();
             t2.start();
 
-//             t1.join();
-             t2.join();
+            t1.join();
+            t2.join();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

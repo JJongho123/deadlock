@@ -16,11 +16,8 @@ public class Main implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // 데드락 시뮬레이터 실행
-//        StrategyContext simulatorContext = new StrategyContext(DeadlockCondition.HOLD_AND_WAIT, ExecuteType.SIMULATOR);
-//        simulatorContext.executeStrategy();
-
-        StrategyContext simulatorContext2 = new StrategyContext(DeadlockCondition.MUTUAL_EXCLUSION, ExecuteType.SIMULATOR);
-        simulatorContext2.executeStrategy();
+        StrategyContext simulatorContext = new StrategyContext(DeadlockCondition.HOLD_AND_WAIT, ExecuteType.SIMULATOR);
+        simulatorContext.executeStrategy();
 
         // 솔루션 실행
         StrategyContext solutionContext = new StrategyContext(DeadlockCondition.CIRCULAR_WAIT, ExecuteType.SOLUTION);
